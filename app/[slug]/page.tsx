@@ -4,7 +4,7 @@ import { getFirestore } from 'firebase-admin/firestore';
 import { Lollipop } from "../../components/visualisation/lollipop_chart";
 import { LineChart } from '../../components/visualisation/line_chart';
 import { SparkLine } from '@/components/visualisation/sparkline';
-import { PageProps } from 'next';
+import PageProps from 'next';
 
 interface VolatilityMeasure {
   id: string;
