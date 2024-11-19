@@ -27,3 +27,5 @@ yarn-error.log*
 key.json
     # Next.js build output
 .next/
+.vercel
+.env*.local

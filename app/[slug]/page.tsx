@@ -4,6 +4,8 @@ import { getFirestore } from 'firebase-admin/firestore';
 import { Lollipop } from "../../components/visualisation/lollipop_chart";
 import { LineChart } from '../../components/visualisation/line_chart';
 import { SparkLine } from '@/components/visualisation/sparkline';
+import { PageProps } from 'next';
+
 interface VolatilityMeasure {
   id: string;
   [key: string]: any;
@@ -33,7 +35,7 @@ const getData = async (slug: string): Promise<dataPayload> => {
   }
 };
 
-async function TickerPages({ params }: { params: { slug: string; }; }) {
+async function TickerPages({ params }: PageProps) {
   const slug = await params.slug;
   const stds = await getData(slug);
   let data = stds.vol_array.data;
