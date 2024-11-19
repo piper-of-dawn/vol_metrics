@@ -1,11 +1,8 @@
 // app/dropdown/page.tsx
-import { notFound } from 'next/navigation'
 import { getFirestore } from 'firebase-admin/firestore';
-import { Lollipop } from "../../components/visualisation/lollipop_chart";
 import { LineChart } from '../../components/visualisation/line_chart';
 import { SparkLine } from '@/components/visualisation/sparkline';
-import PageProps from 'next';
-
+import { initializeApp, cert, getApps } from 'firebase-admin/app';
 interface VolatilityMeasure {
   id: string;
   [key: string]: any;
@@ -14,6 +11,16 @@ interface VolatilityMeasure {
 interface dataPayload {
   vol_array: VolatilityMeasure;
   kde_data: Array<any>;
+}
+
+if (!getApps().length) {
+  initializeApp({
+    credential: cert({
+      projectId: process.env.FIREBASE_PROJECT_ID,
+      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+      privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+    }),
+  });
 }
 
 const getData = async (slug: string): Promise<dataPayload> => {
