@@ -36,7 +36,7 @@ const getData = async (slug: string): Promise<dataPayload> => {
 };
 
 async function TickerPages({ params }: any) {
-  const slug = await params.slug;
+  const { slug } = await params
   const stds = await getData(slug);
   let data = stds.vol_array.data;
   let kde_data = stds.kde_data;
