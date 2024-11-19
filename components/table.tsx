@@ -49,14 +49,14 @@ export const columns: ColumnDef<VolatilityData>[] = [
           table.getIsAllPageRowsSelected() ||
           (table.getIsSomePageRowsSelected() && "indeterminate")
         }
-        onCheckedChange={({value}:{value: any}) => table.toggleAllPageRowsSelected(!!value)}
+        onCheckedChange={(checked: boolean) => table.toggleAllPageRowsSelected(checked)}
         aria-label="Select all"
       />
     ),
     cell: ({ row }) => (
       <Checkbox
         checked={row.getIsSelected()}
-        onCheckedChange={({value}: {value: any}) => row.toggleSelected(!!value)}
+        onCheckedChange={(checked: boolean) => row.toggleSelected(checked)}
         aria-label="Select row"
       />
     ),
@@ -70,7 +70,7 @@ export const columns: ColumnDef<VolatilityData>[] = [
   },
   {
     accessorKey: "vol_quantile",
-    header: ({ column }: { column: ColumnDef<VolatilityData> }) => (
+    header: ({ column }) => (
       <Button
         variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}

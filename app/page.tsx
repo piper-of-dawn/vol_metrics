@@ -16,9 +16,10 @@ if (!getApps().length) {
 }
 
 interface QuantilePayload {
-  ticker: string;
-  quantile: number;
+  id: string;
+  data: Array<VolatilityData>;
 }
+
 
 const getData = async (): Promise<Array<VolatilityData>> => {
   try {
@@ -28,7 +29,7 @@ const getData = async (): Promise<Array<VolatilityData>> => {
     let data = snapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
-    })) 
+     })) as QuantilePayload[]
     return data.filter(item => item.id === 'vol_quantiles')[0].data as Array<VolatilityData>
   } catch (error) {
     console.error('Error fetching data:', error);

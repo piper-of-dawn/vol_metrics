@@ -35,7 +35,7 @@ const getData = async (slug: string): Promise<dataPayload> => {
   }
 };
 
-async function TickerPages({ params }: PageProps) {
+async function TickerPages({ params }: any) {
   const slug = await params.slug;
   const stds = await getData(slug);
   let data = stds.vol_array.data;
