@@ -1,4 +1,3 @@
-// app/dropdown/page.tsx
 import { getFirestore } from 'firebase-admin/firestore';
 import { LineChart } from '../../components/visualisation/line_chart';
 import { SparkLine } from '@/components/visualisation/sparkline';

@@ -21,7 +21,7 @@ interface QuantilePayload {
 }
 
 
-const getData = async (): Promise<Array<VolatilityData>> => {
+const getServerSideProps = async (): Promise<Array<VolatilityData>> => {
   try {
     const db = getFirestore();
     const snapshot = await db.collection("/globals/").get();
@@ -38,7 +38,7 @@ const getData = async (): Promise<Array<VolatilityData>> => {
 };
 
 export default async function Home() {
-  const vol_quantile_data = await getData();
+  const vol_quantile_data = await getServerSideProps();
   return (
     <div className="--font-geist-mono">
 <DataTableDemo data={vol_quantile_data} />
