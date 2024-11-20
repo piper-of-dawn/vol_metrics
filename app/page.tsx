@@ -19,23 +19,22 @@ interface QuantilePayload {
   id: string;
   data: Array<VolatilityData>;
 }
+export const dynamic = 'force-dynamic';
 
-
-const getServerSideProps = async (): Promise<Array<VolatilityData>> => {
+async function getServerSideProps(): Promise<Array<VolatilityData>> {
   try {
     const db = getFirestore();
     const snapshot = await db.collection("/globals/").get();
-
     let data = snapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
-     })) as QuantilePayload[]
-    return data.filter(item => item.id === 'vol_quantiles')[0].data as Array<VolatilityData>
+    })) as QuantilePayload[];
+    return data.filter(item => item.id === 'vol_quantiles')[0].data as Array<VolatilityData>;
   } catch (error) {
     console.error('Error fetching data:', error);
-    return [] as Array<VolatilityData>
+    return [] as Array<VolatilityData>;
   }
-};
+}
 
 export default async function Home() {
   const vol_quantile_data = await getServerSideProps();
