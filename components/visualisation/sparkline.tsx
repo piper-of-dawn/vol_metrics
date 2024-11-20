@@ -45,7 +45,7 @@ export const SparkLine = ({ width, height, data}: SparkLineProps) => {
     return null;
   }
   return (
-    <div className="w-1/2">
+    <div className="bg-white rounded-lg border bg-card text-card-foreground shadow-sm p-4 h-fit">
       <h1 className="ml-7">Title</h1>
       <svg width={width} height={height}>
         <defs>

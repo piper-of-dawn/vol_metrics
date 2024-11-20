@@ -1,6 +1,7 @@
 import { getFirestore } from 'firebase-admin/firestore';
 import { LineChart } from '../../components/visualisation/line_chart';
 import { SparkLine } from '@/components/visualisation/sparkline';
+import {MetricCard} from '@/components/metric_card';
 import { initializeApp, cert, getApps } from 'firebase-admin/app';
 interface VolatilityMeasure {
   id: string;
@@ -46,7 +47,7 @@ async function TickerPages({ params }: any) {
   const stds = await getData(slug);
   let data = stds.vol_array.data;
   let kde_data = stds.kde_data;
-  const last_5_days_vol = data.slice(-5).map((item: { annualized_volatility: number; }) => item.annualized_volatility);
+  const last_5_days_vol = data.slice(-1).map((item: { annualized_volatility: number; }) => item.annualized_volatility);
 
   data = data.map((item: { date: string; annualized_volatility: number; }) => ({
     x: new Date(item.date),
@@ -55,9 +56,14 @@ async function TickerPages({ params }: any) {
 
   return (
     <div style={{ backgroundColor: '#F7FAFF', padding: '20px' }} className="--font-geist-mono">
-      {/* <Lollipop data={data} width={250} height={250} /> */}
-      <LineChart data={kde_data} width={350} height={250} last_5_days_vol={last_5_days_vol} />
-      <SparkLine data={data} width={350} height={100} />
+      <div className='flex flex-col lg:flex-row gap-2'>
+      <MetricCard width={48} height={'fit'} title="Last Day Standard Deviation" datum={last_5_days_vol[last_5_days_vol.length - 1].toFixed(3)}/>
+      <MetricCard width={48} height={'fit'} title="Last Day Standard Deviation Quantile" datum={last_5_days_vol[last_5_days_vol.length - 1].toFixed(3)}/>
+      </div>
+      <div className='flex flex-col lg:flex-row mt-10 gap-5'>
+      <LineChart  data={kde_data} width={350} height={250} last_5_days_vol={last_5_days_vol} />
+      <SparkLine data={data} width={300} height={150} />
+      </div>
     </div>
   );
 

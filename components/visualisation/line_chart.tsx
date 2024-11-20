@@ -45,8 +45,8 @@ export const LineChart = ({ width, height, data, last_5_days_vol}: LineChartProp
     return null;
   }
   return (
-    <div className="w-1/2">
-      <h1 className="ml-7">Title</h1>
+    <div className="bg-white rounded-lg border bg-card text-card-foreground shadow-sm p-4">
+      <h1 className="ml-7">Kernel Density Plot</h1>
       <svg width={width} height={height}>
         <defs>
           <linearGradient id="lineGradient" x1="0" x2="0" y1="0" y2="1">
