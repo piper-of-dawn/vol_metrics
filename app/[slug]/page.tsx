@@ -10,17 +10,11 @@ interface VolatilityMeasure {
   id: string;
   [key: string]: any;
 }
-export const dm_mono = DM_Mono({
+const dmMono = DM_Mono({
   weight: "400",
   subsets: ["latin"],
   variable: "--font-dm-mono",
 })
-
-// export const geistMono = localFont({
-//   src: "./fonts/GeistMonoVF.woff",
-//   variable: "--font-geist-mono",
-//   weight: "100 900",
-// });
 
 interface dataPayload {
   vol_array: VolatilityMeasure;
@@ -70,7 +64,7 @@ async function TickerPages({ params }: any) {
   }));
 
   return (
-    <div className={`${dm_mono.variable} bg-yellow-50 font-mono h-screen flex w-screen flex-col bg-center items-center justify-start p-12`}>
+    <div className={`${dmMono.variable} bg-yellow-50 font-mono h-screen flex w-screen flex-col bg-center items-center justify-start p-12`}>
       <div className='font-mono flex flex-col lg:flex-row gap-2'>
       <MetricCard width={48} height={'fit'} title="Last Day Standard Deviation" datum={last_day_vol[last_day_vol.length - 1].toFixed(3)}/>
       <MetricCard width={48} height={'fit'} title="Last Day Standard Deviation Quantile" datum={last_day_quantile[last_day_quantile.length - 1].toFixed(3)}/>
