@@ -8,11 +8,11 @@ type DataPoint = { x: number; y: number };
 type LineChartProps = {
   width: number;
   height: number;
-  last_5_days_vol: number[];
+  last_day_vol: number[];
   data: DataPoint[];
 };
 
-export const LineChart = ({ width, height, data, last_5_days_vol}: LineChartProps) => {
+export const LineChart = ({ width, height, data, last_day_vol}: LineChartProps) => {
   const boundsWidth = width - MARGIN.right - MARGIN.left;
   const boundsHeight = height - MARGIN.top - MARGIN.bottom;
 
@@ -45,12 +45,12 @@ export const LineChart = ({ width, height, data, last_5_days_vol}: LineChartProp
     return null;
   }
   return (
-    <div className="bg-white rounded-lg border bg-card text-card-foreground shadow-sm p-4">
+    <div className="isolate aspect-video rounded-2xl p-2 bg-white/70 shadow-lg ring-1 ring-black/5">
       <h1 className="ml-7">Kernel Density Plot</h1>
       <svg width={width} height={height}>
         <defs>
           <linearGradient id="lineGradient" x1="0" x2="0" y1="0" y2="1">
-            <stop offset="0%" stopColor="#1a1a1d" stopOpacity={0.8} />
+            <stop offset="0%" stopColor="#807d6f" stopOpacity={0.8} />
             <stop offset="70%" stopColor="#ffffff" stopOpacity={0.1} />
           </linearGradient>
         </defs>
@@ -63,19 +63,13 @@ export const LineChart = ({ width, height, data, last_5_days_vol}: LineChartProp
             d={linePath}
             fillOpacity={0.3}
             fill="url(#lineGradient)"
-            stroke="#221f21"
+            stroke="#44403c"
             strokeWidth={0.75}
             strokeOpacity={1.0}
           />
-          {
-          last_5_days_vol.map((vol, i) => (
-            <>
-              {addLine({key: `Line ${i}`, x1: xScale(vol), x2: xScale(vol), y1: 0, y2: boundsHeight, stroke: "#1b222c", opacity: (i + 1) / 5, strokeWidth: 0.5})}
-              {i === last_5_days_vol.length-1 && addText({x: xScale(vol), y:  -5, content: "We are here", color: "#1b222c", textAnchor: 'middle', fontSize: 10})}
-            </>
-          ))
+          {addLine({key: `LastDayVol`, x1: xScale(last_day_vol[0]), x2: xScale(last_day_vol[0]), y1: 0, y2: boundsHeight, stroke: "#1b222c", opacity: 1, strokeWidth: 0.5})}
+          {addText({x: xScale(last_day_vol[0]), y:  -5, content: "We are here", color: "#1b222c", textAnchor: 'middle', fontSize: 10})}
           
-          }
             <g transform={`translate(0, ${boundsHeight})`}>
           <AxisBottom
             xScale={xScale}

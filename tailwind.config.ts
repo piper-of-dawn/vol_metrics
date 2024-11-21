@@ -50,12 +50,18 @@ export default {
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
   			}
+			
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
-  		}
+  		},
+		fontFamily: {
+			mono: ['--font-dm-mono")'],
+			sans: ['--font-dm-mono']
+		  },
+		
   	}
   },
   plugins: [require("tailwindcss-animate")],

@@ -3,10 +3,24 @@ import { LineChart } from '../../components/visualisation/line_chart';
 import { SparkLine } from '@/components/visualisation/sparkline';
 import {MetricCard} from '@/components/metric_card';
 import { initializeApp, cert, getApps } from 'firebase-admin/app';
+import localFont from "next/font/local";
+// import "./globals.css";
+import { DM_Mono } from 'next/font/google'
 interface VolatilityMeasure {
   id: string;
   [key: string]: any;
 }
+export const dm_mono = DM_Mono({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-dm-mono",
+})
+
+// export const geistMono = localFont({
+//   src: "./fonts/GeistMonoVF.woff",
+//   variable: "--font-geist-mono",
+//   weight: "100 900",
+// });
 
 interface dataPayload {
   vol_array: VolatilityMeasure;
@@ -47,7 +61,8 @@ async function TickerPages({ params }: any) {
   const stds = await getData(slug);
   let data = stds.vol_array.data;
   let kde_data = stds.kde_data;
-  const last_5_days_vol = data.slice(-1).map((item: { annualized_volatility: number; }) => item.annualized_volatility);
+  const last_day_vol = data.slice(-1).map((item: { annualized_volatility: number; }) => item.annualized_volatility);
+  const last_day_quantile = data.slice(-1).map((item: { quantile: number; }) => item.quantile);
 
   data = data.map((item: { date: string; annualized_volatility: number; }) => ({
     x: new Date(item.date),
@@ -55,13 +70,13 @@ async function TickerPages({ params }: any) {
   }));
 
   return (
-    <div style={{ backgroundColor: '#F7FAFF', padding: '20px' }} className="--font-geist-mono">
-      <div className='flex flex-col lg:flex-row gap-2'>
-      <MetricCard width={48} height={'fit'} title="Last Day Standard Deviation" datum={last_5_days_vol[last_5_days_vol.length - 1].toFixed(3)}/>
-      <MetricCard width={48} height={'fit'} title="Last Day Standard Deviation Quantile" datum={last_5_days_vol[last_5_days_vol.length - 1].toFixed(3)}/>
+    <div className={`${dm_mono.variable} bg-yellow-50 font-mono h-screen flex w-screen flex-col bg-center items-center justify-start p-12`}>
+      <div className='font-mono flex flex-col lg:flex-row gap-2'>
+      <MetricCard width={48} height={'fit'} title="Last Day Standard Deviation" datum={last_day_vol[last_day_vol.length - 1].toFixed(3)}/>
+      <MetricCard width={48} height={'fit'} title="Last Day Standard Deviation Quantile" datum={last_day_quantile[last_day_quantile.length - 1].toFixed(3)}/>
       </div>
       <div className='flex flex-col lg:flex-row mt-10 gap-5'>
-      <LineChart  data={kde_data} width={350} height={250} last_5_days_vol={last_5_days_vol} />
+      <LineChart  data={kde_data} width={350} height={250} last_day_vol={last_day_vol} />
       <SparkLine data={data} width={300} height={150} />
       </div>
     </div>

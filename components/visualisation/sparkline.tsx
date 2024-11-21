@@ -45,13 +45,13 @@ export const SparkLine = ({ width, height, data}: SparkLineProps) => {
     return null;
   }
   return (
-    <div className="bg-white rounded-lg border bg-card text-card-foreground shadow-sm p-4 h-fit">
+    <div className="isolate aspect-video rounded-2xl h-fit p-2 bg-white/70 shadow-lg ring-1 ring-black/5">
       <h1 className="ml-7">Title</h1>
       <svg width={width} height={height}>
         <defs>
           <linearGradient id="lineGradient" x1="0" x2="0" y1="0" y2="1">
-            <stop offset="0%" stopColor="#1a1a1d" stopOpacity={0.7} />
-            <stop offset="100%" stopColor="#ffffff" stopOpacity={0.4} />
+            <stop offset="0%" stopColor="#44403c" stopOpacity={0.7} />
+            <stop offset="70%" stopColor="#ffffff" stopOpacity={0.4} />
           </linearGradient>
         </defs>
         <g
@@ -71,7 +71,7 @@ export const SparkLine = ({ width, height, data}: SparkLineProps) => {
 
     <path
         d={linePath}
-        stroke="#221f21"
+        stroke="#44403c"
         strokeWidth={0.75}
         fill="none"
       />
