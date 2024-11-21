@@ -39,9 +39,10 @@ async function getServerSideProps(): Promise<Array<VolatilityData>> {
 export default async function Home() {
   const vol_quantile_data = await getServerSideProps();
   return (
-    <div className="--font-geist-mono">
-<DataTableDemo data={vol_quantile_data} />
-
+    <div className="bg-gradient-to-r from-cyan-800 to-teal-800 w-screen h-screen">
+    <div className=" bg-white/95 backdrop-blur-xl flex w-screen h-screen items-center justify-center">
+<DataTableDemo data={vol_quantile_data}/>
+</div>
     </div>
   );
 }

@@ -64,14 +64,16 @@ async function TickerPages({ params }: any) {
   }));
 
   return (
-    <div className={`${dmMono.variable} bg-yellow-50 font-mono h-screen flex w-screen flex-col bg-center items-center justify-start p-12`}>
-      <div className='font-mono flex flex-col lg:flex-row gap-2'>
+    <div className={`${dmMono.variable} bg-gradient-to-r from-cyan-800 to-teal-800`}>
+      <div className='isolate aspect-video flex flex-col w-screen h-screen bg-white/95 backdrop-blur-2xl justify-start items-center'>
+      <div className='flex flex-col lg:flex-row gap-2'>
       <MetricCard width={48} height={'fit'} title="Last Day Standard Deviation" datum={last_day_vol[last_day_vol.length - 1].toFixed(3)}/>
       <MetricCard width={48} height={'fit'} title="Last Day Standard Deviation Quantile" datum={last_day_quantile[last_day_quantile.length - 1].toFixed(3)}/>
       </div>
       <div className='flex flex-col lg:flex-row mt-10 gap-5'>
       <LineChart  data={kde_data} width={350} height={250} last_day_vol={last_day_vol} />
       <SparkLine data={data} width={300} height={150} />
+      </div>
       </div>
     </div>
   );

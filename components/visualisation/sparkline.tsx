@@ -45,7 +45,7 @@ export const SparkLine = ({ width, height, data}: SparkLineProps) => {
     return null;
   }
   return (
-    <div className="isolate aspect-video rounded-2xl h-fit p-2 bg-white/70 shadow-lg ring-1 ring-black/5">
+    <div className="glassmorphic">
       <h1 className="ml-7">Title</h1>
       <svg width={width} height={height}>
         <defs>

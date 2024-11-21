@@ -45,7 +45,7 @@ export const LineChart = ({ width, height, data, last_day_vol}: LineChartProps) 
     return null;
   }
   return (
-    <div className="isolate aspect-video rounded-2xl p-2 bg-white/70 shadow-lg ring-1 ring-black/5">
+    <div className="rounded-xl bg-white/95 backdrop-blur-xl">
       <h1 className="ml-7">Kernel Density Plot</h1>
       <svg width={width} height={height}>
         <defs>

@@ -1,6 +1,8 @@
 "use client"
 import * as React from "react"
 import {VolatilityData } from "@/typing"
+import Link from 'next/link'
+
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -15,6 +17,7 @@ import {
   Column,
 } from "@tanstack/react-table"
 import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react"
+import { useRouter } from 'next/navigation'
 
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -113,9 +116,12 @@ export function DataTableDemo(data: any) {
       rowSelection,
     },
   })
-
+  const router = useRouter();
+  const navigateToSlugPage = (slug: string) => {
+    router.push(`/${slug}`); // Adjust the path as necessary
+  }
   return (
-    <div className="w-full lg:w-1/2">
+    <div className="w-full lg:w-1/2 rounded-xl bg-white/50 backdrop-blur-xl p-12">
       <div className="flex items-center py-4">
         <Input
           placeholder="Filter tickers..."
@@ -178,6 +184,7 @@ export function DataTableDemo(data: any) {
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
+                  onClick={() => navigateToSlugPage(row.original.ticker)}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
@@ -229,3 +236,8 @@ export function DataTableDemo(data: any) {
     </div>
   )
 }
+
+
+
+
+// Function to navigate to the slug page
