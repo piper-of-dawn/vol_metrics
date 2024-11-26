@@ -3,9 +3,10 @@ import { LineChart } from '../../components/visualisation/line_chart';
 import { SparkLine } from '@/components/visualisation/sparkline';
 import {MetricCard} from '@/components/metric_card';
 import { initializeApp, cert, getApps } from 'firebase-admin/app';
-import localFont from "next/font/local";
-// import "./globals.css";
+import {RollingVolDataLineChart} from '@/components/visualisation/rolling_volatility/lineChartDatasetTransition'
 import { DM_Mono } from 'next/font/google'
+import  Example  from '@/components/visualisation/vol_cone';
+import {getCleanedDataForVolCone} from '@/scripts/stats';
 interface VolatilityMeasure {
   id: string;
   [key: string]: any;
@@ -73,6 +74,8 @@ async function TickerPages({ params }: any) {
       <div className='flex flex-col lg:flex-row mt-10 gap-5'>
       <LineChart  data={kde_data} width={350} height={250} last_day_vol={last_day_vol} />
       <SparkLine data={data} width={300} height={150} />
+      {/* <RollingVolDataLineChart width={350} height={250} /> */}
+      <Example width={500} height={300} data={getCleanedDataForVolCone(stds)}/>
       </div>
       </div>
     </div>

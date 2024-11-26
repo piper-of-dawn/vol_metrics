@@ -16,3 +16,12 @@ export interface FirebaseConfig {
     // Add other fields as needed
   }
   
+  export interface VolatilityMeasure {
+    id: string;
+    [key: string]: any;
+  }
+
+  export interface dataPayload {
+    vol_array: VolatilityMeasure;
+    kde_data: Array<any>;
+  }

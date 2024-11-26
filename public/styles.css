@@ -5,9 +5,18 @@
     }
 
     .glassmorphic {
-      backdrop-filter: blur(10px);
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 18px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      border: 1px solid rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(12px) saturate(180%);
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      padding: 20px;
+      transition: all 0.3s ease-in-out;
     }
+    
+    .glassmorphic:hover {
+      backdrop-filter: blur(14px) saturate(200%);
+      transform: scale(1.02);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+    }
+    
